@@ -363,6 +363,7 @@ resource "aws_iam_role" "this" {
 
 # Policies attached ref https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_node_group
 resource "aws_iam_role_policy_attachment" "this" {
+  count = local.create_iam_role
   for_each = { for k, v in toset(compact([
     "${local.iam_role_policy_prefix}/AmazonEKSWorkerNodePolicy",
     "${local.iam_role_policy_prefix}/AmazonEC2ContainerRegistryReadOnly",
